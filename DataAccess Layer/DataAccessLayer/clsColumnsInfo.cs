@@ -82,7 +82,7 @@ namespace DataAccessLayer
                 case "DateTime":
                     return "DateTime.Now";
                 default:
-                    return "\"\"";
+                    return "";
             }
         }
     }
