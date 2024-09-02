@@ -31,7 +31,7 @@ namespace CodeGenerator
                 cbDataBase.Items.Add(item);
             }
 
-            cbDataBase.SelectedIndex = 0;
+            cbDataBase.SelectedIndex = 6;
         }
 
         private void LoadTables()
@@ -47,6 +47,19 @@ namespace CodeGenerator
             cbTables.SelectedIndex = 0;
         }
 
+        private void LoadColumns()
+        {
+            var Items = Settings.GetALLColumns(cbDataBase.SelectedItem.ToString(),cbTables.SelectedItem.ToString());
+
+            cbColumns.Items.Clear();
+
+            foreach (var item in Items)
+            {
+                cbColumns.Items.Add(item);
+            }
+
+            cbColumns.SelectedIndex = 0;
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadDataBases();
@@ -55,6 +68,17 @@ namespace CodeGenerator
         private void cbDataBase_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadTables();
+        }
+
+        private void cbTables_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadColumns();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tbBusinessLayer.Text = clsGenerateCode.GenerateBusinessLayer(cbDataBase.SelectedItem.ToString(),
+                cbTables.SelectedItem.ToString());
         }
     }
 }

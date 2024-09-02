@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+
+    
     public class clsDataAccess
     {
 
@@ -90,5 +92,53 @@ namespace DataAccessLayer
             return list;
 
         }
+
+        public static List<clsColumnInfo> GetColumnsInfo(string DataBaseName, string TableName)
+        {
+            List<clsColumnInfo> ColumnInfos = new List<clsColumnInfo>();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+
+            string query = $@"USE [{DataBaseName}];
+                              SELECT COLUMN_NAME, DATA_TYPE
+                              FROM INFORMATION_SCHEMA.COLUMNS
+                              WHERE TABLE_NAME = @TableName;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@DataBaseName", DataBaseName);
+            command.Parameters.AddWithValue("@TableName", TableName);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string columnName = reader.GetString(0);
+                    string dataType = reader.GetString(1);
+
+                    ColumnInfos.Add(new clsColumnInfo { Name = columnName, DataType = dataType });
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                // pass
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return ColumnInfos;
+        }
+
     }
 }
