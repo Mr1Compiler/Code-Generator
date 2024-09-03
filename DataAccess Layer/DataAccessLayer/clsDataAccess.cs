@@ -101,7 +101,7 @@ namespace DataAccessLayer
 
 
             string query = $@"USE [{DataBaseName}];
-                              SELECT COLUMN_NAME, DATA_TYPE
+                              SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE
                               FROM INFORMATION_SCHEMA.COLUMNS
                               WHERE TABLE_NAME = @TableName;";
 
@@ -120,8 +120,9 @@ namespace DataAccessLayer
                 {
                     string columnName = reader.GetString(0);
                     string dataType = reader.GetString(1);
+                    bool allowNull = reader.GetString(2) == "YES";
 
-                    ColumnInfos.Add(new clsColumnInfo { Name = columnName, DataType = dataType });
+                    ColumnInfos.Add(new clsColumnInfo { Name = columnName, DataType = dataType, AllowNull = allowNull});
                 }
 
                 reader.Close();

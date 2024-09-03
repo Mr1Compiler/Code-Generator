@@ -10,8 +10,7 @@ namespace DataAccessLayer
     {
         public string Name { get; set; }
         public string DataType { get; set; }
-
-
+        public bool AllowNull { get; set; }
         public static string MapSqlTypeToCSharpType(string sqlType)
         {
             sqlType = sqlType.ToUpper();

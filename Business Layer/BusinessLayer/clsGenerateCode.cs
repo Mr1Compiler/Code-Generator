@@ -16,11 +16,16 @@ namespace BusinessLayer
 {
     public class clsGenerateCode
     {
-        public static string GenerateBusinessLayer(string DatabaseName, string TableName)
+        public static string FillBusinessLayer(string DatabaseName, string TableName)
         {
-            string BusinessLayer = "";
-            List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
+            string BusinessLayer = $@"using System;
+using System.Data;
+using {TableName}BusinessLayer;
 
+namespace {TableName}BusinessLayer
+{{
+";
+            List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
             clsBusinessTemplets.Names(TableName);
 
             BusinessLayer += clsBusinessTemplets.ColumnTemplete(TableName, Columns);
@@ -29,12 +34,31 @@ namespace BusinessLayer
             BusinessLayer += clsBusinessTemplets.PrivateAddNewMethod(TableName, Columns);
             BusinessLayer += clsBusinessTemplets.PrivateUpdateMethod(TableName, Columns);
             BusinessLayer += clsBusinessTemplets.Find(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.Save(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.GetAll(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.Delete(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.isExist(TableName, Columns);
+            BusinessLayer += clsBusinessTemplets.Save(TableName);
+            BusinessLayer += clsBusinessTemplets.GetAll(TableName);
+            BusinessLayer += clsBusinessTemplets.Delete(TableName, Columns[0]);
+            BusinessLayer += clsBusinessTemplets.isExist(TableName, Columns[0]);
+
+            BusinessLayer += $@"
+}}
+";
 
             return BusinessLayer;
+        }
+        public static string FillDataAccessLayer(string DatabaseName, string TableName)
+        {
+            string DataAccessLayer = $@"using System;
+using System.Data;
+using System.Data.SqlClient;
+";
+            List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
+
+            clsDataAccessTemplets.Load(TableName, Columns);
+
+            DataAccessLayer += clsDataAccessTemplets.GetAll();
+
+
+            return DataAccessLayer;
         }
     }
 }

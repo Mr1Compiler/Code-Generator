@@ -206,7 +206,7 @@ else
             return str;
         }
 
-        public static string Save(string TableName, List<clsColumnInfo> ColumnsInfo)
+        public static string Save(string TableName)
         {
             string str = $@"
 public bool Save()
@@ -237,7 +237,7 @@ public bool Save()
             return str;
         }
 
-        public static string GetAll(string TableName, List<clsColumnInfo> ColumnsInfo)
+        public static string GetAll(string TableName)
         {
             string str = $@"
 public static DataTable GetAll{TableName}()
@@ -249,25 +249,25 @@ public static DataTable GetAll{TableName}()
             return str;
         }
 
-        public static string Delete(string TableName, List<clsColumnInfo> ColumnsInfo)
+        public static string Delete(string TableName, clsColumnInfo Column)
         {
 
             string str = $@"
- public static bool Delete{TableName.Remove(TableName.Length - 1)}({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name});
+ public static bool Delete{TableName.Remove(TableName.Length - 1)}({clsColumnInfo.MapSqlTypeToCSharpType(Column.DataType)} {Column.Name});
         {{
-           return  {DataAccessLayerName}.Delete{TableName.Remove(TableName.Length - 1)}({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[0].DataType)});
+           return  {DataAccessLayerName}.Delete{TableName.Remove(TableName.Length - 1)}({Column.Name});
         }}";
 
             return str;
         }
 
-        public static string isExist(string TableName, List<clsColumnInfo> ColumnsInfo)
+        public static string isExist(string TableName, clsColumnInfo Column)
         {
 
             string str = $@"
- public static bool is{TableName.Remove(TableName.Length - 1)}Exist({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name});
+ public static bool is{TableName.Remove(TableName.Length - 1)}Exist({clsColumnInfo.MapSqlTypeToCSharpType(Column.DataType)} {Column.Name});
         {{
-           return  {DataAccessLayerName}.Is{TableName.Remove(TableName.Length - 1)}Exist({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[0].DataType)});
+           return  {DataAccessLayerName}.Is{TableName.Remove(TableName.Length - 1)}Exist({Column.Name});
         }}";
 
             return str;

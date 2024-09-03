@@ -37,8 +37,6 @@
             this.cbDataBase = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbColumns = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // tbBusinessLayer
@@ -86,7 +84,7 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.button1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(79, 426);
+            this.button1.Location = new System.Drawing.Point(77, 386);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(141, 47);
             this.button1.TabIndex = 5;
@@ -102,7 +100,6 @@
             this.cbTables.Name = "cbTables";
             this.cbTables.Size = new System.Drawing.Size(143, 27);
             this.cbTables.TabIndex = 6;
-            this.cbTables.SelectedIndexChanged += new System.EventHandler(this.cbTables_SelectedIndexChanged);
             // 
             // cbDataBase
             // 
@@ -134,33 +131,12 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Tables";
             // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(38, 354);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 26);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Columns";
-            // 
-            // cbColumns
-            // 
-            this.cbColumns.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbColumns.FormattingEnabled = true;
-            this.cbColumns.Location = new System.Drawing.Point(153, 353);
-            this.cbColumns.Name = "cbColumns";
-            this.cbColumns.Size = new System.Drawing.Size(143, 27);
-            this.cbColumns.TabIndex = 10;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1330, 639);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.cbColumns);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbDataBase);
@@ -191,8 +167,6 @@
         private System.Windows.Forms.ComboBox cbDataBase;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbColumns;
     }
 }
 

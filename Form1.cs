@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -46,20 +47,6 @@ namespace CodeGenerator
 
             cbTables.SelectedIndex = 0;
         }
-
-        private void LoadColumns()
-        {
-            var Items = Settings.GetALLColumns(cbDataBase.SelectedItem.ToString(),cbTables.SelectedItem.ToString());
-
-            cbColumns.Items.Clear();
-
-            foreach (var item in Items)
-            {
-                cbColumns.Items.Add(item);
-            }
-
-            cbColumns.SelectedIndex = 0;
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadDataBases();
@@ -70,15 +57,11 @@ namespace CodeGenerator
             LoadTables();
         }
 
-        private void cbTables_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadColumns();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            tbBusinessLayer.Text = clsGenerateCode.GenerateBusinessLayer(cbDataBase.SelectedItem.ToString(),
-                cbTables.SelectedItem.ToString());
+            //tbBusinessLayer.Text = clsGenerateCode.FillBusinessLayer(cbDataBase.SelectedItem.ToString(), cbTables.SelectedItem.ToString());
+
+            tbDataLayer.Text = clsGenerateCode.FillDataAccessLayer(cbDataBase.SelectedItem.ToString(), cbTables.SelectedItem.ToString());
         }
     }
 }

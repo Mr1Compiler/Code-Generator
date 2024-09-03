@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsBusinessTemplets.cs" />
+    <Compile Include="clsDataAccessTemplets.cs" />
     <Compile Include="clsGenerateCode.cs" />
     <Compile Include="clsSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
