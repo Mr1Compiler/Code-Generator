@@ -55,8 +55,9 @@ using System.Data.SqlClient;
 
             clsDataAccessTemplets.Load(TableName, Columns);
 
-            DataAccessLayer += clsDataAccessTemplets.GetAll();
+            DataAccessLayer += clsDataAccessTemplets.GetInfoByID();
 
+            DataAccessLayer += clsDataAccessTemplets.AddNew();
 
             return DataAccessLayer;
         }

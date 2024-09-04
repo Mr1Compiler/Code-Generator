@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace BusinessLayer
         {
             return str.Remove(str.Length - 1);
         }
-        public static string GetAll()
+        public static string GetInfoByID()
         {
 
             string str = $@"
@@ -54,7 +55,7 @@ string query = ""SELECT * FROM {TableName} WHERE {ColumnsInfo[0].Name} = @{Colum
 
 SqlCommand command = new SqlCommand(query, connection);
 
-command.Parameters.AddWithValue(""{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name.ToLower()});
+command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name.ToLower()});
 
  try
 {{
@@ -66,7 +67,7 @@ if (reader.Read())
 isFound = true;
 ";
 
-            for(int i = 1; i < ColumnsInfo.Count; i++)
+            for (int i = 1; i < ColumnsInfo.Count; i++)
             {
                 if (ColumnsInfo[i].AllowNull == false)
                 {
@@ -107,6 +108,94 @@ catch (Exception ex)
             return isFound;
 }}";
 
+            return str;
+        }
+
+
+        public static string AddNew()
+        {
+            string str = $@"public static int AddNew{TableNameSingle}(";
+
+            for (int i = 1; i < ColumnsInfo.Count; i++)
+            {
+                str += $@" {GetDataType(ColumnsInfo[i].DataType)} {ColumnsInfo[i].Name},";
+            }
+
+            str = RemoveLastLetter(str) + ")";
+
+            str += $@"
+{{
+{GetDataType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name} = {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[0].DataType))};
+
+ SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+string query = @""insert into {TableName}(
+";
+
+            for (int i = 1; i < ColumnsInfo.Count; i++)
+            {
+                str += $@" {ColumnsInfo[i].Name},";
+            }
+
+            str = RemoveLastLetter(str) + ")";
+
+            str += $@" Values (";
+
+            for (int i = 1; i < ColumnsInfo.Count; i++)
+            {
+                str += $@" @{ColumnsInfo[i].Name},";
+            }
+
+            str = RemoveLastLetter(str) + ");";
+
+            str += $@" Select SELECT SCOPE_IDENTITY();"";
+
+SqlCommand command = new SqlCommand(query, connection);
+";
+
+            for (int i = 1; i < ColumnsInfo.Count; i++)
+            {
+                if (ColumnsInfo[i].AllowNull == false)
+                {
+                    str += $@"command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}
+                "", {ColumnsInfo[i].Name})";
+                }
+                else
+                {
+                    str += $@"if({ColumnsInfo[i].Name} != {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))} && {ColumnsInfo[i].Name} != null
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name})
+
+else
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", System.DBNull.Value);
+";
+                }
+            }
+
+                str += $@"
+try
+ {{
+connection.Open();
+
+object result = command.ExecuteScalar();
+
+if (result != null && int.TryParse(result.ToString(), out int insertedID))
+{{
+{ColumnsInfo[0].Name} = insertedID;
+}}
+
+catch (Exception ex)
+{{
+//Console.WriteLine(""Error: "" + ex.Message);
+               
+}}
+
+finally 
+{{ 
+ connection.Close(); 
+}}
+
+return {ColumnsInfo[0].Name};";
+         
             return str;
         }
     }
