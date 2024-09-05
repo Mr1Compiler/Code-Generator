@@ -12,7 +12,7 @@ namespace BusinessLayer
     
     public class clsSettings
     {
-
+        public static byte ?NameNumberInColumns = 0;
         public List<string> GetAllLocalDatabases()
         {
             return clsDataAccess.GetDataBases();
@@ -23,10 +23,9 @@ namespace BusinessLayer
             return clsDataAccess.GetTables(DatabaseName);
         }
 
-       public List<string> GetALLColumns(string DatabaseName, string TableName)
+       public static List<string> GetALLColumns(List<clsColumnInfo> Items)
         {
             
-            var Items = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
 
             List<string> Columns = new List<string>();
 
@@ -35,7 +34,36 @@ namespace BusinessLayer
                 Columns.Add(item.Name);
             }
 
+            NameNumberInColumns = GetNameNumberInColumns(Columns);
+
             return Columns;
+        }
+
+        static public int GetNameNumber()
+        {
+            return Convert.ToInt16(NameNumberInColumns);
+        }
+        public static byte? GetNameNumberInColumns(List<string> Columns)
+        {
+            byte Number = 0;
+
+
+            foreach (string Column in Columns)
+            {
+                if(Column.ToLower().Contains("first"))
+                {
+                    return Number;
+                }
+
+                if(Column.ToLower().Contains("name"))
+                {
+                    return Number;
+                }
+
+                Number++;
+            }
+
+            return null;
         }
     }
 }

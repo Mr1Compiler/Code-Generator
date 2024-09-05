@@ -11,6 +11,7 @@ namespace DataAccessLayer
         public string Name { get; set; }
         public string DataType { get; set; }
         public bool AllowNull { get; set; }
+
         public static string MapSqlTypeToCSharpType(string sqlType)
         {
             sqlType = sqlType.ToUpper();
@@ -75,7 +76,11 @@ namespace DataAccessLayer
             switch (DataType)
             {
                 case "int":
-                    return "-1";
+                    return "-1";    
+                case "byte":
+                    return "0";
+                case "decimal":
+                    return "0";
                 case "string":
                     return "\"\"";
                 case "DateTime":
@@ -84,5 +89,7 @@ namespace DataAccessLayer
                     return "";
             }
         }
+
+       
     }
 }

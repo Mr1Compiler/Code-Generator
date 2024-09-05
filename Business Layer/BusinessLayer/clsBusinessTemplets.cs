@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer;
 using DataAccessLayer;
 
 namespace CodeGenerator
@@ -220,55 +221,64 @@ else
             return str;
         }
 
+        public static int NameNumberInColumn()
+        {
+            return Convert.ToInt16(clsSettings.NameNumberInColumns);
+        }
+
         public static string FindByName()
         {
-            string str = $@"
-public static cls{TableName} Find({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[1].DataType)} {ColumnsInfo[1].Name})
+            string str = "";
+            if (clsSettings.NameNumberInColumns != null)
+            {
+                int Number = NameNumberInColumn();
+                str += $@"
+public static cls{TableName} Find({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[Number].DataType)} {ColumnsInfo[Number].Name})
 {{
 ";
 
-            for (int i = 0; i < ColumnsInfo.Count; i++)
-            {
-                if(i == 1)
+                for (int i = 0; i < ColumnsInfo.Count; i++)
                 {
-                    continue;
+                    if (i == Number)
+                    {
+                        continue;
+                    }
+                    str += $@"{clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[i].DataType)} {ColumnsInfo[i].Name}={clsColumnInfo.AssginValues(clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[i].DataType))}; ";
                 }
-                str += $@"{clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[i].DataType)} {ColumnsInfo[i].Name}={clsColumnInfo.AssginValues(clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[i].DataType))}; ";
-            }
 
-            str += $@"
-if({DataAccessLayerName}.Get{TableName}InfoByName({ColumnsInfo[1].Name},";
+                str += $@"
+if({DataAccessLayerName}.Get{TableName}InfoByName({ColumnsInfo[Number].Name},";
 
-            for (int i = 0; i < ColumnsInfo.Count; i++)
-            {
-                if (i == 1)
+                for (int i = 0; i < ColumnsInfo.Count; i++)
                 {
-                    continue;
+                    if (i == Number)
+                    {
+                        continue;
+                    }
+                    str += $@" ref {ColumnsInfo[i].Name},";
                 }
-                str += $@" ref {ColumnsInfo[i].Name},";
-            }
 
-            str = str.Remove(str.Length - 1);
+                str = str.Remove(str.Length - 1);
 
-            str += $@"))
+                str += $@"))
 
     return new {ClassName}(";
 
-            foreach (var column in ColumnsInfo)
-            {
-                str += $@" {column.Name},";
-            }
+                foreach (var column in ColumnsInfo)
+                {
+                    str += $@" {column.Name},";
+                }
 
-            str = str.Remove(str.Length - 1);
+                str = str.Remove(str.Length - 1);
 
-            str += $@");
+                str += $@");
 
 else
     return null;
 }}
 ";
 
-
+            }
             return str;
         }
 

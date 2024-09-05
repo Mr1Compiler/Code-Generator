@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using CodeGenerator;
+using DataAccessLayer;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -417,31 +418,36 @@ return isFound;
 
         public static string FindByName()
         {
-            string str = $@"public static bool Get{TableName}InfoByName ({GetDataType(ColumnsInfo[1].DataType)} {ColumnsInfo[1].Name}, ";
-
-            for (int i = 0; i < ColumnsInfo.Count; i++)
+            
+            string str = "";
+            if (clsSettings.NameNumberInColumns != null)
             {
-                if(i == 1)
+                int Number = clsSettings.GetNameNumber();
+                str = $@"public static bool Get{TableName}InfoByName ({GetDataType(ColumnsInfo[Number].DataType)} {ColumnsInfo[Number].Name}, ";
+
+                for (int i = 0; i < ColumnsInfo.Count; i++)
                 {
-                    continue;
+                    if (i == Number)
+                    {
+                        continue;
+                    }
+
+                    str += $@" ref {GetDataType(ColumnsInfo[i].DataType)} {ColumnsInfo[i].Name},";
                 }
 
-                str += $@" ref {GetDataType(ColumnsInfo[i].DataType)} {ColumnsInfo[i].Name},";
-            }
+                str = RemoveLastLetter(str) + ")";
 
-            str = RemoveLastLetter(str) + ")";
-
-            str += $@"
+                str += $@"
 {{
 bool isFound = false;
 
 SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-string query = ""SELECT * FROM {TableName} WHERE {ColumnsInfo[1].Name} = @{ColumnsInfo[1].Name}"";
+string query = ""SELECT * FROM {TableName} WHERE {ColumnsInfo[Number].Name} = @{ColumnsInfo[Number].Name}"";
 
 SqlCommand command = new SqlCommand(query, connection);
 
-command.Parameters.AddWithValue(""@{ColumnsInfo[1].Name}"", {ColumnsInfo[1].Name});
+command.Parameters.AddWithValue(""@{ColumnsInfo[Number].Name}"", {ColumnsInfo[Number].Name});
 
  try
 {{
@@ -455,14 +461,14 @@ connection.Open();
  isFound = true;
 ";
 
-            for (int i = 0; i < ColumnsInfo.Count; i++)
-            {
-                if (i == 1)
+                for (int i = 0; i < ColumnsInfo.Count; i++)
                 {
-                    continue;
-                }
+                    if (i == 1)
+                    {
+                        continue;
+                    }
 
-                str += $@"
+                    str += $@"
  if (reader[""{ColumnsInfo[i].Name}""] != DBNull.Value)
 {{
 {ColumnsInfo[i].Name} = ({GetDataType(ColumnsInfo[i].DataType)})reader[""{ColumnsInfo[i].Name}""];
@@ -471,9 +477,9 @@ connection.Open();
 {{
     {ColumnsInfo[i].Name} = {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))};
  }}";
-            }
+                }
 
-            str += $@"
+                str += $@"
 }}
  else
  {{
@@ -499,7 +505,7 @@ finally
 }}
 ";
 
-
+            }
                 return str;
         }
     }

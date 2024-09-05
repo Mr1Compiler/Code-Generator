@@ -20,6 +20,8 @@ namespace BusinessLayer
         {
             string BusinessLayer = "";
             List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
+
+            clsSettings.GetALLColumns(Columns);
             clsBusinessTemplets.Load(TableName, Columns);
 
             BusinessLayer += clsBusinessTemplets.ColumnTemplete();
