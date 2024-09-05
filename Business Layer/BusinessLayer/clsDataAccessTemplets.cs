@@ -34,7 +34,7 @@ namespace BusinessLayer
         {
 
             string str = $@"
-public static bool Get{TableName}InfoBy{GetDataType(ColumnsInfo[0].DataType)}({GetDataType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name}, ";
+public static bool Get{TableName}InfoBy{ColumnsInfo[0].Name}({GetDataType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name}, ";
 
 
 
@@ -55,7 +55,7 @@ string query = ""SELECT * FROM {TableName} WHERE {ColumnsInfo[0].Name} = @{Colum
 
 SqlCommand command = new SqlCommand(query, connection);
 
-command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name.ToLower()});
+command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name});
 
  try
 {{
@@ -85,14 +85,17 @@ else
 {{
 {ColumnsInfo[i].Name} = ({GetDataType(ColumnsInfo[i].DataType)})reader[""{ColumnsInfo[i].Name}""];
 }}
+
 ";
                 }
             }
 
             str += $@"
+}}
 else
 {{
     isFound = false;
+}}
 }}
 
 catch (Exception ex)
@@ -157,15 +160,15 @@ SqlCommand command = new SqlCommand(query, connection);
             {
                 if (ColumnsInfo[i].AllowNull == false)
                 {
-                    str += $@"command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}
-                "", {ColumnsInfo[i].Name})";
+                    str += $@"
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name});";
                 }
                 else
                 {
                     str += $@"
 
-if({ColumnsInfo[i].Name} != {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))} && {ColumnsInfo[i].Name} != null
-command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name})
+if({ColumnsInfo[i].Name} != {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))} && {ColumnsInfo[i].Name} != null)
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name});
 else
 command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", System.DBNull.Value);
 ";
@@ -183,7 +186,7 @@ if (result != null && int.TryParse(result.ToString(), out int insertedID))
 {{
 {ColumnsInfo[0].Name} = insertedID;
 }}
-
+}}
 catch (Exception ex)
 {{
 //Console.WriteLine(""Error: "" + ex.Message);
@@ -195,7 +198,10 @@ finally
  connection.Close(); 
 }}
 
-return {ColumnsInfo[0].Name};";
+return {ColumnsInfo[0].Name};
+}}
+
+";
          
             return str;
         }
@@ -203,8 +209,7 @@ return {ColumnsInfo[0].Name};";
         public static string Update()
         {
             string str = $@"
-public static bool Update{TableNameSingle}(
-";
+public static bool Update{TableNameSingle}(";
 
             foreach(var Column in ColumnsInfo)
             {
@@ -214,23 +219,23 @@ public static bool Update{TableNameSingle}(
             str = RemoveLastLetter(str) + ")";
 
             str += $@"
-nt rowsAffected=0;
+{{
+int rowsAffected=0;
 SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-string query = @Update {TableName} 
+string query = @""Update {TableName} 
 set ";
 
 
             for(int i = 1;i < ColumnsInfo.Count; i++)
             {
-                str += $@"
-{ColumnsInfo[i].Name} = @{ColumnsInfo[i].Name},";
+                str += $@" {ColumnsInfo[i].Name} = @{ColumnsInfo[i].Name},";
             }
 
             str = RemoveLastLetter(str);
 
             str += $@"
-where {ColumnsInfo[0].Name} = @{ColumnsInfo[0].Name};
+where {ColumnsInfo[0].Name} = @{ColumnsInfo[0].Name}"";
 
             SqlCommand command = new SqlCommand(query, connection);
 ";
@@ -238,17 +243,17 @@ where {ColumnsInfo[0].Name} = @{ColumnsInfo[0].Name};
 
             for (int i = 1; i < ColumnsInfo.Count; i++)
             {
-                if (!ColumnsInfo[i].AllowNull)
+                if (ColumnsInfo[i].AllowNull == false)
                 {
-                    str += $@"command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}
-                "", {ColumnsInfo[i].Name})";
+                    str += $@"
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name});";
                 }
                 else 
                 {
                     str += $@"
 
-if({ColumnsInfo[i].Name} != {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))} && {ColumnsInfo[i].Name} != null
-command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name})
+if({ColumnsInfo[i].Name} != {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))} && {ColumnsInfo[i].Name} != null)
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name});
 else
 command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", System.DBNull.Value);
 ";
@@ -282,7 +287,7 @@ return (rowsAffected > 0);
 
         public static string GetAll()
         {
-            string str = $@"public static datatable GetAll{TableName}()
+            string str = $@"public static DataTable GetAll{TableName}()
 {{
 
 DataTable dt = new DataTable();
@@ -318,7 +323,7 @@ finally
     connection.Close(); 
  }}
 
- return dt
+ return dt;
 }}
 ";
 
@@ -369,7 +374,7 @@ return (rowsAffected > 0);
         {
             string str = $@"
 public static bool Is{TableNameSingle}Exist({ColumnsInfo[0].DataType} {ColumnsInfo[0].Name})
-
+{{
 bool isFound = false;
 
 SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);

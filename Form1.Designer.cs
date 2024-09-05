@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tbBusinessLayer = new System.Windows.Forms.TextBox();
             this.tbDataLayer = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,6 +38,8 @@
             this.cbDataBase = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnBusinessCopy = new System.Windows.Forms.Button();
+            this.btnDataCopy = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbBusinessLayer
@@ -84,6 +87,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(77, 386);
@@ -133,12 +137,42 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Tables";
             // 
+            // btnBusinessCopy
+            // 
+            this.btnBusinessCopy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnBusinessCopy.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBusinessCopy.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBusinessCopy.ForeColor = System.Drawing.Color.Black;
+            this.btnBusinessCopy.Location = new System.Drawing.Point(726, 12);
+            this.btnBusinessCopy.Name = "btnBusinessCopy";
+            this.btnBusinessCopy.Size = new System.Drawing.Size(73, 32);
+            this.btnBusinessCopy.TabIndex = 10;
+            this.btnBusinessCopy.Text = "Copy";
+            this.btnBusinessCopy.UseVisualStyleBackColor = false;
+            this.btnBusinessCopy.Click += new System.EventHandler(this.btnBusinessCopy_Click);
+            // 
+            // btnDataCopy
+            // 
+            this.btnDataCopy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnDataCopy.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDataCopy.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDataCopy.ForeColor = System.Drawing.Color.Black;
+            this.btnDataCopy.Location = new System.Drawing.Point(1222, 12);
+            this.btnDataCopy.Name = "btnDataCopy";
+            this.btnDataCopy.Size = new System.Drawing.Size(73, 32);
+            this.btnDataCopy.TabIndex = 12;
+            this.btnDataCopy.Text = "Copy";
+            this.btnDataCopy.UseVisualStyleBackColor = false;
+            this.btnDataCopy.Click += new System.EventHandler(this.btnDataCopy_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1330, 639);
+            this.Controls.Add(this.btnDataCopy);
+            this.Controls.Add(this.btnBusinessCopy);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbDataBase);
@@ -149,6 +183,7 @@
             this.Controls.Add(this.tbDataLayer);
             this.Controls.Add(this.tbBusinessLayer);
             this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -169,6 +204,8 @@
         private System.Windows.Forms.ComboBox cbDataBase;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnBusinessCopy;
+        private System.Windows.Forms.Button btnDataCopy;
     }
 }
 

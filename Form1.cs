@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CodeGenerator
 {
@@ -62,6 +63,30 @@ namespace CodeGenerator
             tbBusinessLayer.Text = clsGenerateCode.FillBusinessLayer(cbDataBase.SelectedItem.ToString(), cbTables.SelectedItem.ToString());
 
             tbDataLayer.Text = clsGenerateCode.FillDataAccessLayer(cbDataBase.SelectedItem.ToString(), cbTables.SelectedItem.ToString());
+        }
+
+        private void btnBusinessCopy_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbBusinessLayer.Text))
+            {
+                Clipboard.SetText(tbBusinessLayer.Text);
+            }
+            else
+            {
+                MessageBox.Show("The text box is empty. Nothing to copy.");
+            }
+        }
+
+        private void btnDataCopy_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbDataLayer.Text))
+            { 
+                Clipboard.SetText(tbDataLayer.Text);
+            }
+            else
+            {
+                MessageBox.Show("The text box is empty. Nothing to copy.");
+            }
         }
     }
 }

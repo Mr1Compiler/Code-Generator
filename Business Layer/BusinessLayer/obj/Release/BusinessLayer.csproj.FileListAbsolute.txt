@@ -1,0 +1,9 @@
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\bin\Release\BusinessLayer.dll
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\bin\Release\BusinessLayer.pdb
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\bin\Release\DataAccessLayer.dll
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\bin\Release\DataAccessLayer.pdb
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\obj\Release\BusinessLayer.csproj.AssemblyReference.cache
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\obj\Release\BusinessLayer.csproj.CoreCompileInputs.cache
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\obj\Release\Business.EA331CBA.Up2Date
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\obj\Release\BusinessLayer.dll
+E:\Projects\CodeGenerator\Business Layer\BusinessLayer\obj\Release\BusinessLayer.pdb

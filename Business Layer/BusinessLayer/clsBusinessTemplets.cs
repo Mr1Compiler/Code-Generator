@@ -12,12 +12,20 @@ namespace CodeGenerator
         public static string AddNew = "";
         public static string DataAccessLayerName = "";
         public static string ClassName = "";
+        public static string TableName = "";
+        public static string TableNameSingle = "";
 
-        public static void Names(string TableName)
+        public static void Names(string tableName)
         {
-            AddNew = $"_AddNew{TableName}";
-            DataAccessLayerName = $"cls{TableName}DataAccess";
-            ClassName = $"cls{TableName}";
+            AddNew = $"_AddNew{tableName}";
+            DataAccessLayerName = $"cls{tableName}DataAccess";
+            ClassName = $"cls{tableName}";
+
+            TableName = tableName;
+
+            TableNameSingle = tableName.Remove(tableName.Length - 1);
+
+
         }
 
 
@@ -46,13 +54,18 @@ public class cls{TableName}
 {{
 public enum enMode {{AddNew = 0,Update = 1}};
 public enMode Mode = enMode.AddNew;
-}}";
+";
 
             // string Definition = PrintColumnsDefintion(ColumnsInfo);
 
             Templete += PrintColumnsDefintion(ColumnsInfo);
 
             return Templete;
+        }
+
+        public static string GetDataType(string DataType)
+        {
+            return clsColumnInfo.MapSqlTypeToCSharpType(DataType);
         }
 
         public static string PublicConstractersTemplete(string TableName, List<clsColumnInfo> ColumnsInfo)
@@ -66,7 +79,7 @@ public cls{TableName}()
             foreach (var column in ColumnsInfo)
             {
                 publicConstractor += $@"
-this.{column.Name} = {clsColumnInfo.AssginValues(column.DataType)};";
+this.{column.Name} = {clsColumnInfo.AssginValues(GetDataType(column.DataType))};";
             }
 
             publicConstractor += $@"
@@ -80,7 +93,7 @@ Mode = enMode.AddNew;
         {
             string PrivateConstractor = $@"
 
-priavte cls{TableName}(";
+private cls{TableName}(";
 
 
             foreach (var column in ColumnsInfo)
@@ -119,9 +132,9 @@ Mode = enMode.Update;
         public static string PrivateAddNewMethod(string TableName, List<clsColumnInfo> ColumnsInfo)
         {
             string str = $@"
-private bool _AddNew{TableName}()
+private bool _AddNew{TableNameSingle}()
 {{
-    this.{ColumnsInfo[0].Name} = cls{TableName}DataAccess.AddNew{TableName}(";
+    this.{ColumnsInfo[0].Name} = cls{TableName}DataAccess.AddNew{TableNameSingle}(";
 
             for (int i = 1; i < ColumnsInfo.Count; i++)
             {
@@ -135,7 +148,7 @@ private bool _AddNew{TableName}()
             str = str.Remove(str.Length - 1);
 
             str += $@");
-    return (this.{ColumnsInfo[0].Name} != -1)
+    return (this.{ColumnsInfo[0].Name} != -1);
 }}
 ";
 
@@ -145,9 +158,9 @@ private bool _AddNew{TableName}()
         public static string PrivateUpdateMethod(string TableName, List<clsColumnInfo> ColumnsInfo)
         {
             string str = $@"
-private bool _Update{TableName}()
+private bool _Update{TableNameSingle}()
 {{
-    return {DataAccessLayerName}.Update{TableName}(";
+    return {DataAccessLayerName}.Update{TableNameSingle}(";
 
             foreach (var column in ColumnsInfo)
             {
@@ -175,7 +188,7 @@ public static cls{TableName} Find({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsI
             }
 
             str += $@"
-if({DataAccessLayerName}.Get{TableName}InfoByID({ColumnsInfo[0].Name},";
+if({DataAccessLayerName}.Get{TableName}InfoBy{ColumnsInfo[0].Name}({ColumnsInfo[0].Name},";
 
             for (int i = 1; i < ColumnsInfo.Count; i++)
             {
@@ -216,7 +229,7 @@ public bool Save()
             switch  (Mode)
             {{
                 case enMode.AddNew:
-                    if (_AddNewContact())
+                    if (_AddNew{TableNameSingle}())
                     {{
 
                         Mode = enMode.Update;
@@ -228,10 +241,11 @@ public bool Save()
                     }}
 
                 case enMode.Update:
-
-                    return _UpdateContact();
+                    return _Update{TableNameSingle}();
 
             }}
+
+return false;
         }}
 ";
             return str;
@@ -242,7 +256,7 @@ public bool Save()
             string str = $@"
 public static DataTable GetAll{TableName}()
 {{
-    return {DataAccessLayerName}.GetAll{TableName}()
+    return {DataAccessLayerName}.GetAll{TableName}();
 }}
 ";
 
@@ -253,7 +267,7 @@ public static DataTable GetAll{TableName}()
         {
 
             string str = $@"
- public static bool Delete{TableName.Remove(TableName.Length - 1)}({clsColumnInfo.MapSqlTypeToCSharpType(Column.DataType)} {Column.Name});
+ public static bool Delete{TableName.Remove(TableName.Length - 1)}({clsColumnInfo.MapSqlTypeToCSharpType(Column.DataType)} {Column.Name})
         {{
            return  {DataAccessLayerName}.Delete{TableName.Remove(TableName.Length - 1)}({Column.Name});
         }}";
@@ -265,7 +279,7 @@ public static DataTable GetAll{TableName}()
         {
 
             string str = $@"
- public static bool is{TableName.Remove(TableName.Length - 1)}Exist({clsColumnInfo.MapSqlTypeToCSharpType(Column.DataType)} {Column.Name});
+ public static bool is{TableName.Remove(TableName.Length - 1)}Exist({clsColumnInfo.MapSqlTypeToCSharpType(Column.DataType)} {Column.Name})
         {{
            return  {DataAccessLayerName}.Is{TableName.Remove(TableName.Length - 1)}Exist({Column.Name});
         }}";

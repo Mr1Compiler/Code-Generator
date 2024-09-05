@@ -1,0 +1,15 @@
+E:\Projects\CodeGenerator\bin\Release\CodeGenerator.exe.config
+E:\Projects\CodeGenerator\bin\Release\CodeGenerator.exe
+E:\Projects\CodeGenerator\bin\Release\CodeGenerator.pdb
+E:\Projects\CodeGenerator\bin\Release\BusinessLayer.dll
+E:\Projects\CodeGenerator\bin\Release\DataAccessLayer.dll
+E:\Projects\CodeGenerator\bin\Release\BusinessLayer.pdb
+E:\Projects\CodeGenerator\bin\Release\DataAccessLayer.pdb
+E:\Projects\CodeGenerator\obj\Release\CodeGenerator.csproj.AssemblyReference.cache
+E:\Projects\CodeGenerator\obj\Release\CodeGenerator.Form1.resources
+E:\Projects\CodeGenerator\obj\Release\CodeGenerator.Properties.Resources.resources
+E:\Projects\CodeGenerator\obj\Release\CodeGenerator.csproj.GenerateResource.cache
+E:\Projects\CodeGenerator\obj\Release\CodeGenerator.csproj.CoreCompileInputs.cache
+E:\Projects\CodeGenerator\obj\Release\CodeGene.5CC6BE46.Up2Date
+E:\Projects\CodeGenerator\obj\Release\CodeGenerator.exe
+E:\Projects\CodeGenerator\obj\Release\CodeGenerator.pdb
