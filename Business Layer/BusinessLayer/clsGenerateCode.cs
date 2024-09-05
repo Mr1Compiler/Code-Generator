@@ -18,29 +18,23 @@ namespace BusinessLayer
     {
         public static string FillBusinessLayer(string DatabaseName, string TableName)
         {
-            string BusinessLayer = $@"using System;
-using System.Data;
-using {TableName}BusinessLayer;
-
-namespace {TableName}BusinessLayer
-{{
-";
+            string BusinessLayer = "";
             List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
-            clsBusinessTemplets.Names(TableName);
+            clsBusinessTemplets.Load(TableName, Columns);
 
-            BusinessLayer += clsBusinessTemplets.ColumnTemplete(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.PublicConstractersTemplete(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.PrivateConstractorTempelete(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.PrivateAddNewMethod(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.PrivateUpdateMethod(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.Find(TableName, Columns);
-            BusinessLayer += clsBusinessTemplets.Save(TableName);
-            BusinessLayer += clsBusinessTemplets.GetAll(TableName);
-            BusinessLayer += clsBusinessTemplets.Delete(TableName, Columns[0]);
-            BusinessLayer += clsBusinessTemplets.isExist(TableName, Columns[0]);
+            BusinessLayer += clsBusinessTemplets.ColumnTemplete();
+            BusinessLayer += clsBusinessTemplets.PublicConstractersTemplete();
+            BusinessLayer += clsBusinessTemplets.PrivateConstractorTempelete();
+            BusinessLayer += clsBusinessTemplets.PrivateAddNewMethod();
+            BusinessLayer += clsBusinessTemplets.PrivateUpdateMethod();
+            BusinessLayer += clsBusinessTemplets.Find();
+            BusinessLayer += clsBusinessTemplets.Save();
+            BusinessLayer += clsBusinessTemplets.GetAll();
+            BusinessLayer += clsBusinessTemplets.Delete();
+            BusinessLayer += clsBusinessTemplets.isExist();
+            BusinessLayer += clsBusinessTemplets.FindByName();
 
             BusinessLayer += $@"
-}}
 }}
 ";
 
@@ -48,13 +42,7 @@ namespace {TableName}BusinessLayer
         }
         public static string FillDataAccessLayer(string DatabaseName, string TableName)
         {
-            string DataAccessLayer = $@"using System;
-using System.Data;
-using System.Data.SqlClient;
-
-namespace {TableName}DataAccessLayer
-{{
-public class cls{TableName} 
+            string DataAccessLayer = $@"public class cls{TableName}DataAccess
 {{
 ";
             List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
@@ -62,19 +50,13 @@ public class cls{TableName}
             clsDataAccessTemplets.Load(TableName, Columns);
 
             DataAccessLayer += clsDataAccessTemplets.GetInfoByID();
-
             DataAccessLayer += clsDataAccessTemplets.AddNew();
-
             DataAccessLayer += clsDataAccessTemplets.Update();
-
             DataAccessLayer += clsDataAccessTemplets.GetAll();
-
             DataAccessLayer += clsDataAccessTemplets.Delete();
-
             DataAccessLayer += clsDataAccessTemplets.IsExist();
-
+            DataAccessLayer += clsDataAccessTemplets.FindByName();
             DataAccessLayer += $@"
-}}
 
 }}";
 

@@ -151,7 +151,7 @@ string query = @""insert into {TableName}(
 
             str = RemoveLastLetter(str) + ");";
 
-            str += $@" Select SELECT SCOPE_IDENTITY();"";
+            str += $@" SELECT SCOPE_IDENTITY();"";
 
 SqlCommand command = new SqlCommand(query, connection);
 ";
@@ -344,7 +344,7 @@ where {ColumnsInfo[0].Name} = @{ColumnsInfo[0].Name}"";
 
 SqlCommand command = new SqlCommand(query, connection);
 
- command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name};
+ command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name});
 
  try
 {{
@@ -383,7 +383,7 @@ string query = ""SELECT Found=1 FROM {TableName} WHERE {ColumnsInfo[0].Name} = @
 
 SqlCommand command = new SqlCommand(query, connection);
 
-command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name};
+command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name});
 
 try
 {{
@@ -413,6 +413,94 @@ return isFound;
 
 
             return str;
+        }
+
+        public static string FindByName()
+        {
+            string str = $@"public static bool Get{TableName}InfoByName ({GetDataType(ColumnsInfo[1].DataType)} {ColumnsInfo[1].Name}, ";
+
+            for (int i = 0; i < ColumnsInfo.Count; i++)
+            {
+                if(i == 1)
+                {
+                    continue;
+                }
+
+                str += $@" ref {GetDataType(ColumnsInfo[i].DataType)} {ColumnsInfo[i].Name},";
+            }
+
+            str = RemoveLastLetter(str) + ")";
+
+            str += $@"
+{{
+bool isFound = false;
+
+SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+string query = ""SELECT * FROM {TableName} WHERE {ColumnsInfo[1].Name} = @{ColumnsInfo[1].Name}"";
+
+SqlCommand command = new SqlCommand(query, connection);
+
+command.Parameters.AddWithValue(""@{ColumnsInfo[1].Name}"", {ColumnsInfo[1].Name});
+
+ try
+{{
+connection.Open();
+ SqlDataReader reader = command.ExecuteReader();
+
+ if (reader.Read())
+ {{
+
+ // The record was found
+ isFound = true;
+";
+
+            for (int i = 0; i < ColumnsInfo.Count; i++)
+            {
+                if (i == 1)
+                {
+                    continue;
+                }
+
+                str += $@"
+ if (reader[""{ColumnsInfo[i].Name}""] != DBNull.Value)
+{{
+{ColumnsInfo[i].Name} = ({GetDataType(ColumnsInfo[i].DataType)})reader[""{ColumnsInfo[i].Name}""];
+}}
+ else
+{{
+    {ColumnsInfo[i].Name} = {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))};
+ }}";
+            }
+
+            str += $@"
+}}
+ else
+ {{
+ // The record was not found
+  isFound = false;
+}}
+
+ reader.Close();
+
+
+ }}
+  catch (Exception ex)
+ {{
+  //Console.WriteLine(""Error: "" + ex.Message);
+  isFound = false;
+}}
+finally
+{{
+   connection.Close();
+}}
+
+ return isFound;
+}}
+";
+
+
+                return str;
         }
     }
 }

@@ -13,14 +13,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|e:\\projects\\codegenerator\\business layer\\businesslayer\\clsgeneratecode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|solutionrelative:business layer\\businesslayer\\clsgeneratecode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2554D937-DE6F-46D5-98E2-AA2BC06052F9}|CodeGenerator.csproj|e:\\projects\\codegenerator\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2554D937-DE6F-46D5-98E2-AA2BC06052F9}|CodeGenerator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2554D937-DE6F-46D5-98E2-AA2BC06052F9}|CodeGenerator.csproj|e:\\projects\\codegenerator\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2554D937-DE6F-46D5-98E2-AA2BC06052F9}|CodeGenerator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -60,35 +52,10 @@
               "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsGenerateCode.cs",
               "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsGenerateCode.cs",
               "RelativeToolTip": "Business Layer\\BusinessLayer\\clsGenerateCode.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T14:52:45.67Z",
+              "WhenOpened": "2024-09-05T19:19:34.3Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "E:\\Projects\\CodeGenerator\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T14:45:48.478Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "E:\\Projects\\CodeGenerator\\Form1.cs [Design]",
-              "RelativeToolTip": "Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T12:51:57.877Z",
-              "EditorCaption": " [Design]"
             }
           ]
         },
@@ -104,9 +71,9 @@
               "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsBusinessTemplets.cs",
               "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsBusinessTemplets.cs",
               "RelativeToolTip": "Business Layer\\BusinessLayer\\clsBusinessTemplets.cs",
-              "ViewState": "AgIAAMoAAAAAAAAAAIAwwOYAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAHoAAAAAAAAAAAApwIkAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T14:49:46.064Z",
+              "WhenOpened": "2024-09-05T19:19:36.785Z",
               "EditorCaption": ""
             },
             {
@@ -117,9 +84,9 @@
               "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsDataAccessTemplets.cs",
               "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsDataAccessTemplets.cs",
               "RelativeToolTip": "Business Layer\\BusinessLayer\\clsDataAccessTemplets.cs",
-              "ViewState": "AgIAAMsAAAAAAAAAAAAewOcAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAMwHwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T14:56:07.127Z",
+              "WhenOpened": "2024-09-05T19:19:35.863Z",
               "EditorCaption": ""
             }
           ]
