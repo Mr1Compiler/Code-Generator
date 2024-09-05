@@ -59,7 +59,7 @@ namespace CodeGenerator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //tbBusinessLayer.Text = clsGenerateCode.FillBusinessLayer(cbDataBase.SelectedItem.ToString(), cbTables.SelectedItem.ToString());
+            tbBusinessLayer.Text = clsGenerateCode.FillBusinessLayer(cbDataBase.SelectedItem.ToString(), cbTables.SelectedItem.ToString());
 
             tbDataLayer.Text = clsGenerateCode.FillDataAccessLayer(cbDataBase.SelectedItem.ToString(), cbTables.SelectedItem.ToString());
         }

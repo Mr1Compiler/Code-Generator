@@ -162,9 +162,10 @@ SqlCommand command = new SqlCommand(query, connection);
                 }
                 else
                 {
-                    str += $@"if({ColumnsInfo[i].Name} != {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))} && {ColumnsInfo[i].Name} != null
-command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name})
+                    str += $@"
 
+if({ColumnsInfo[i].Name} != {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))} && {ColumnsInfo[i].Name} != null
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name})
 else
 command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", System.DBNull.Value);
 ";
@@ -196,6 +197,216 @@ finally
 
 return {ColumnsInfo[0].Name};";
          
+            return str;
+        }
+
+        public static string Update()
+        {
+            string str = $@"
+public static bool Update{TableNameSingle}(
+";
+
+            foreach(var Column in ColumnsInfo)
+            {
+                str += $@" {GetDataType(Column.DataType)} {Column.Name},";
+            }
+
+            str = RemoveLastLetter(str) + ")";
+
+            str += $@"
+nt rowsAffected=0;
+SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+string query = @Update {TableName} 
+set ";
+
+
+            for(int i = 1;i < ColumnsInfo.Count; i++)
+            {
+                str += $@"
+{ColumnsInfo[i].Name} = @{ColumnsInfo[i].Name},";
+            }
+
+            str = RemoveLastLetter(str);
+
+            str += $@"
+where {ColumnsInfo[0].Name} = @{ColumnsInfo[0].Name};
+
+            SqlCommand command = new SqlCommand(query, connection);
+";
+
+
+            for (int i = 1; i < ColumnsInfo.Count; i++)
+            {
+                if (!ColumnsInfo[i].AllowNull)
+                {
+                    str += $@"command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}
+                "", {ColumnsInfo[i].Name})";
+                }
+                else 
+                {
+                    str += $@"
+
+if({ColumnsInfo[i].Name} != {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))} && {ColumnsInfo[i].Name} != null
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", {ColumnsInfo[i].Name})
+else
+command.Parameters.AddWithValue(""@{ColumnsInfo[i].Name}"", System.DBNull.Value);
+";
+                }
+            }
+
+            str += $@"
+try
+{{
+ connection.Open();
+ rowsAffected = command.ExecuteNonQuery();
+
+}}
+catch (Exception ex)
+{{
+//Console.WriteLine(""Error: "" + ex.Message);
+ return false;
+}}
+
+finally 
+{{ 
+connection.Close(); 
+}} 
+
+return (rowsAffected > 0);
+}}
+";
+
+            return str; 
+        }
+
+        public static string GetAll()
+        {
+            string str = $@"public static datatable GetAll{TableName}()
+{{
+
+DataTable dt = new DataTable();
+SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+string query = ""SELECT * FROM {TableName}"";
+
+SqlCommand command = new SqlCommand(query, connection);
+
+ try
+{{
+connection.Open();
+
+ SqlDataReader reader = command.ExecuteReader();
+
+if (reader.HasRows)
+
+ {{
+dt.Load(reader);
+}}
+
+reader.Close();
+               
+
+}}
+
+catch (Exception ex)
+{{
+// Console.WriteLine(""Error: "" + ex.Message);
+}}
+finally 
+{{ 
+    connection.Close(); 
+ }}
+
+ return dt
+}}
+";
+
+
+            return str;
+        }
+
+        public static string Delete()
+        {
+            string str = $@"public static bool Delete{TableNameSingle}({ColumnsInfo[0].DataType} {ColumnsInfo[0].Name})
+{{
+int rowsAffected=0;
+
+SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+string query = @""Delete {TableName} 
+where {ColumnsInfo[0].Name} = @{ColumnsInfo[0].Name}"";
+
+SqlCommand command = new SqlCommand(query, connection);
+
+ command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name};
+
+ try
+{{
+ connection.Open();
+
+rowsAffected = command.ExecuteNonQuery();
+
+}}
+catch (Exception ex)
+{{
+   // Console.WriteLine(""Error: "" + ex.Message);
+}}
+finally 
+{{ 
+                
+ connection.Close(); 
+
+}}
+
+return (rowsAffected > 0);
+}}
+";
+            return str;
+        }
+
+        public static string IsExist()
+        {
+            string str = $@"
+public static bool Is{TableNameSingle}Exist({ColumnsInfo[0].DataType} {ColumnsInfo[0].Name})
+
+bool isFound = false;
+
+SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+string query = ""SELECT Found=1 FROM {TableName} WHERE {ColumnsInfo[0].Name} = @{ColumnsInfo[0].Name}"";
+
+SqlCommand command = new SqlCommand(query, connection);
+
+command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name};
+
+try
+{{
+connection.Open();
+SqlDataReader reader = command.ExecuteReader();
+
+isFound = reader.HasRows;
+                
+ reader.Close();
+}}
+
+catch (Exception ex)
+{{
+  //Console.WriteLine(""Error: "" + ex.Message);
+    isFound = false;
+}}
+
+finally
+{{
+    connection.Close();
+}}
+
+return isFound;
+
+}}
+";
+
+
             return str;
         }
     }

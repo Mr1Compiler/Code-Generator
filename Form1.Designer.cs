@@ -41,6 +41,7 @@
             // 
             // tbBusinessLayer
             // 
+            this.tbBusinessLayer.BackColor = System.Drawing.Color.Gray;
             this.tbBusinessLayer.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBusinessLayer.Location = new System.Drawing.Point(339, 50);
             this.tbBusinessLayer.Multiline = true;
@@ -51,6 +52,7 @@
             // 
             // tbDataLayer
             // 
+            this.tbDataLayer.BackColor = System.Drawing.Color.Gray;
             this.tbDataLayer.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDataLayer.Location = new System.Drawing.Point(825, 50);
             this.tbDataLayer.Multiline = true;
@@ -135,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1330, 639);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);

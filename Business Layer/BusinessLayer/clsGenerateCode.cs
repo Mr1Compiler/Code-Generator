@@ -41,6 +41,7 @@ namespace {TableName}BusinessLayer
 
             BusinessLayer += $@"
 }}
+}}
 ";
 
             return BusinessLayer;
@@ -50,6 +51,11 @@ namespace {TableName}BusinessLayer
             string DataAccessLayer = $@"using System;
 using System.Data;
 using System.Data.SqlClient;
+
+namespace {TableName}DataAccessLayer
+{{
+public class cls{TableName} 
+{{
 ";
             List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
 
@@ -58,6 +64,20 @@ using System.Data.SqlClient;
             DataAccessLayer += clsDataAccessTemplets.GetInfoByID();
 
             DataAccessLayer += clsDataAccessTemplets.AddNew();
+
+            DataAccessLayer += clsDataAccessTemplets.Update();
+
+            DataAccessLayer += clsDataAccessTemplets.GetAll();
+
+            DataAccessLayer += clsDataAccessTemplets.Delete();
+
+            DataAccessLayer += clsDataAccessTemplets.IsExist();
+
+            DataAccessLayer += $@"
+}}
+
+}}";
+
 
             return DataAccessLayer;
         }
