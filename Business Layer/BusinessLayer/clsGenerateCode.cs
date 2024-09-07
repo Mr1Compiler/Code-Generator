@@ -29,12 +29,11 @@ namespace BusinessLayer
             BusinessLayer += clsBusinessTemplets.PrivateConstractorTempelete();
             BusinessLayer += clsBusinessTemplets.PrivateAddNewMethod();
             BusinessLayer += clsBusinessTemplets.PrivateUpdateMethod();
-            BusinessLayer += clsBusinessTemplets.Find();
             BusinessLayer += clsBusinessTemplets.Save();
             BusinessLayer += clsBusinessTemplets.GetAll();
             BusinessLayer += clsBusinessTemplets.Delete();
             BusinessLayer += clsBusinessTemplets.isExist();
-            BusinessLayer += clsBusinessTemplets.FindByName();
+            BusinessLayer += clsBusinessTemplets.Find();
 
             BusinessLayer += $@"
 }}
@@ -57,7 +56,7 @@ namespace BusinessLayer
             DataAccessLayer += clsDataAccessTemplets.GetAll();
             DataAccessLayer += clsDataAccessTemplets.Delete();
             DataAccessLayer += clsDataAccessTemplets.IsExist();
-            DataAccessLayer += clsDataAccessTemplets.FindByName();
+            DataAccessLayer += clsDataAccessTemplets.GeneralFind();
             DataAccessLayer += $@"
 
 }}";

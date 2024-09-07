@@ -416,14 +416,108 @@ return isFound;
             return str;
         }
 
-        public static string FindByName()
-        {
+//        public static string FindByName()
+//        {
             
-            string str = "";
-            if (clsSettings.NameNumberInColumns != null)
+//            string str = "";
+//            if (clsSettings.NameNumberInColumns != null)
+//            {
+//                int Number = clsSettings.GetNameNumber();
+//                str = $@"public static bool Get{TableName}InfoByName ({GetDataType(ColumnsInfo[Number].DataType)} {ColumnsInfo[Number].Name}, ";
+
+//                for (int i = 0; i < ColumnsInfo.Count; i++)
+//                {
+//                    if (i == Number)
+//                    {
+//                        continue;
+//                    }
+
+//                    str += $@" ref {GetDataType(ColumnsInfo[i].DataType)} {ColumnsInfo[i].Name},";
+//                }
+
+//                str = RemoveLastLetter(str) + ")";
+
+//                str += $@"
+//{{
+//bool isFound = false;
+
+//SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+//string query = ""SELECT * FROM {TableName} WHERE {ColumnsInfo[Number].Name} = @{ColumnsInfo[Number].Name}"";
+
+//SqlCommand command = new SqlCommand(query, connection);
+
+//command.Parameters.AddWithValue(""@{ColumnsInfo[Number].Name}"", {ColumnsInfo[Number].Name});
+
+// try
+//{{
+//connection.Open();
+// SqlDataReader reader = command.ExecuteReader();
+
+// if (reader.Read())
+// {{
+
+// // The record was found
+// isFound = true;
+//";
+
+//                for (int i = 0; i < ColumnsInfo.Count; i++)
+//                {
+//                    if (i == 1)
+//                    {
+//                        continue;
+//                    }
+
+//                    str += $@"
+// if (reader[""{ColumnsInfo[i].Name}""] != DBNull.Value)
+//{{
+//{ColumnsInfo[i].Name} = ({GetDataType(ColumnsInfo[i].DataType)})reader[""{ColumnsInfo[i].Name}""];
+//}}
+// else
+//{{
+//    {ColumnsInfo[i].Name} = {clsColumnInfo.AssginValues(GetDataType(ColumnsInfo[i].DataType))};
+// }}";
+//                }
+
+//                str += $@"
+//}}
+// else
+// {{
+// // The record was not found
+//  isFound = false;
+//}}
+
+// reader.Close();
+
+
+// }}
+//  catch (Exception ex)
+// {{
+//  //Console.WriteLine(""Error: "" + ex.Message);
+//  isFound = false;
+//}}
+//finally
+//{{
+//   connection.Close();
+//}}
+
+// return isFound;
+//}}
+//";
+
+//            }
+//                return str;
+//        }
+
+        public static string GeneralFind()
+        {
+            string str = $@"
+";
+            for (int k = 0; k < ColumnsInfo.Count; k++)
             {
-                int Number = clsSettings.GetNameNumber();
-                str = $@"public static bool Get{TableName}InfoByName ({GetDataType(ColumnsInfo[Number].DataType)} {ColumnsInfo[Number].Name}, ";
+                int Number = k;
+                str += $@"
+public static bool Get{TableName}InfoBy{ColumnsInfo[Number].Name}({GetDataType(ColumnsInfo[Number].DataType)} {ColumnsInfo[Number].Name}, ";
 
                 for (int i = 0; i < ColumnsInfo.Count; i++)
                 {
@@ -505,8 +599,9 @@ finally
 }}
 ";
 
+
             }
-                return str;
+            return str;
         }
     }
 }
