@@ -31,94 +31,11 @@ namespace BusinessLayer
         {
             return str.Remove(str.Length - 1);
         }
-        public static string GetInfoByID()
-        {
-
-            string str = $@"
-public static bool Get{TableName}InfoBy{ColumnsInfo[0].Name}({GetDataType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name}, ";
-
-
-
-            for (int i = 1; i < ColumnsInfo.Count; i++)
-            {
-                str += $@" ref {GetDataType(ColumnsInfo[i].DataType)} {ColumnsInfo[i].Name},";
-            }
-
-            str = RemoveLastLetter(str) + $@")
-{{";
-
-            str += $@"
-bool isFound = false;
-
-SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-string query = ""SELECT * FROM {TableName} WHERE {ColumnsInfo[0].Name} = @{ColumnsInfo[0].Name}"";
-
-SqlCommand command = new SqlCommand(query, connection);
-
-command.Parameters.AddWithValue(""@{ColumnsInfo[0].Name}"", {ColumnsInfo[0].Name});
-
- try
-{{
-connection.Open();
-SqlDataReader reader = command.ExecuteReader();
-
-if (reader.Read())
-{{
-isFound = true;
-";
-
-            for (int i = 1; i < ColumnsInfo.Count; i++)
-            {
-                if (ColumnsInfo[i].AllowNull == false)
-                {
-                    str += $@"{ColumnsInfo[i].Name} = ({GetDataType(ColumnsInfo[i].DataType)})reader[""{ColumnsInfo[i].Name}""];
-";
-                }
-                else
-                {
-                    str += $@"
-if(reader[""{ColumnsInfo[i].Name}""] != DBNull.Value)
-{{
-{ColumnsInfo[i].Name} = ({GetDataType(ColumnsInfo[i].DataType)})reader[""{ColumnsInfo[i].Name}""];
-}}
-else
-{{
-{ColumnsInfo[i].Name} = ({GetDataType(ColumnsInfo[i].DataType)})reader[""{ColumnsInfo[i].Name}""];
-}}
-
-";
-                }
-            }
-
-            str += $@"
-}}
-else
-{{
-    isFound = false;
-}}
-}}
-
-catch (Exception ex)
-            {{
-                //Console.WriteLine(""Error: "" + ex.Message);
-                isFound = false;
-            }}
-            finally
-            {{ 
-                connection.Close(); 
-            }}
-
-            return isFound;
-}}";
-
-            return str;
-        }
-
+     
 
         public static string AddNew()
         {
-            string str = $@"public static int AddNew{TableNameSingle}(";
+            string str = $@"public static int AddNew{TableName}(";
 
             for (int i = 1; i < ColumnsInfo.Count; i++)
             {
@@ -210,7 +127,7 @@ return {ColumnsInfo[0].Name};
         public static string Update()
         {
             string str = $@"
-public static bool Update{TableNameSingle}(";
+public static bool Update{TableName}(";
 
             foreach(var Column in ColumnsInfo)
             {
@@ -334,7 +251,7 @@ finally
 
         public static string Delete()
         {
-            string str = $@"public static bool Delete{TableNameSingle}({ColumnsInfo[0].DataType} {ColumnsInfo[0].Name})
+            string str = $@"public static bool Delete{TableName}({ColumnsInfo[0].DataType} {ColumnsInfo[0].Name})
 {{
 int rowsAffected=0;
 
@@ -374,7 +291,7 @@ return (rowsAffected > 0);
         public static string IsExist()
         {
             string str = $@"
-public static bool Is{TableNameSingle}Exist({ColumnsInfo[0].DataType} {ColumnsInfo[0].Name})
+public static bool Is{TableName}Exist({ColumnsInfo[0].DataType} {ColumnsInfo[0].Name})
 {{
 bool isFound = false;
 

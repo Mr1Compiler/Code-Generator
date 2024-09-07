@@ -50,7 +50,6 @@ namespace BusinessLayer
 
             clsDataAccessTemplets.Load(TableName, Columns);
 
-            DataAccessLayer += clsDataAccessTemplets.GetInfoByID();
             DataAccessLayer += clsDataAccessTemplets.AddNew();
             DataAccessLayer += clsDataAccessTemplets.Update();
             DataAccessLayer += clsDataAccessTemplets.GetAll();

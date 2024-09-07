@@ -136,7 +136,7 @@ Mode = enMode.Update;
             string str = $@"
 private bool _AddNew{TableName}()
 {{
-    this.{ColumnsInfo[0].Name} = cls{TableName}DataAccess.AddNew{TableNameSingle}(";
+    this.{ColumnsInfo[0].Name} = cls{TableName}DataAccess.AddNew{TableName}(";
 
             for (int i = 1; i < ColumnsInfo.Count; i++)
             {
@@ -162,7 +162,7 @@ private bool _AddNew{TableName}()
             string str = $@"
 private bool _Update{TableName}()
 {{
-    return {DataAccessLayerName}.Update{TableNameSingle}(";
+    return {DataAccessLayerName}.Update{TableName}(";
 
             foreach (var column in ColumnsInfo)
             {
@@ -233,9 +233,9 @@ public static DataTable GetAll{TableName}()
         {
 
             string str = $@"
- public static bool Delete{TableName.Remove(TableName.Length - 1)}({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name})
+ public static bool Delete{TableName}({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name})
         {{
-           return  {DataAccessLayerName}.Delete{TableName.Remove(TableName.Length - 1)}({ColumnsInfo[0].Name});
+           return  {DataAccessLayerName}.Delete{TableName}({ColumnsInfo[0].Name});
         }}";
 
             return str;
@@ -245,9 +245,9 @@ public static DataTable GetAll{TableName}()
         {
 
             string str = $@"
- public static bool is{TableName.Remove(TableName.Length - 1)}Exist({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name})
+ public static bool is{TableName}Exist({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[0].DataType)} {ColumnsInfo[0].Name})
         {{
-           return  {DataAccessLayerName}.Is{TableName.Remove(TableName.Length - 1)}Exist({ColumnsInfo[0].Name});
+           return  {DataAccessLayerName}.Is{TableName}Exist({ColumnsInfo[0].Name});
         }}";
 
             return str;
@@ -307,7 +307,7 @@ public static DataTable GetAll{TableName}()
             {
                 int Number = k;
                 str += $@"
-public static cls{TableName} Find({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[Number].DataType)} {ColumnsInfo[Number].Name})
+public static cls{TableName} FindWith{ColumnsInfo[Number].Name}({clsColumnInfo.MapSqlTypeToCSharpType(ColumnsInfo[Number].DataType)} {ColumnsInfo[Number].Name})
 {{
 ";
 
