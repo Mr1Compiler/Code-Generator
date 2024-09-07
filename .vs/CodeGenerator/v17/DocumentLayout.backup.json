@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "E:\\Projects\\CodeGenerator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|e:\\projects\\codegenerator\\business layer\\businesslayer\\clsbusinesstemplets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|solutionrelative:business layer\\businesslayer\\clsbusinesstemplets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|e:\\projects\\codegenerator\\business layer\\businesslayer\\clsgeneratecode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|solutionrelative:business layer\\businesslayer\\clsgeneratecode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|e:\\projects\\codegenerator\\business layer\\businesslayer\\clsdataaccesstemplets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|solutionrelative:business layer\\businesslayer\\clsdataaccesstemplets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|e:\\projects\\codegenerator\\business layer\\businesslayer\\clsdataaccessgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|solutionrelative:business layer\\businesslayer\\clsdataaccessgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|e:\\projects\\codegenerator\\business layer\\businesslayer\\clsbusinesslayergenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|solutionrelative:business layer\\businesslayer\\clsbusinesslayergenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,14 +47,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "clsBusinessTemplets.cs",
-              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsBusinessTemplets.cs",
-              "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsBusinessTemplets.cs",
-              "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsBusinessTemplets.cs",
-              "RelativeToolTip": "Business Layer\\BusinessLayer\\clsBusinessTemplets.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAiwKQAAAA1AAAAAAAAAA==",
+              "Title": "clsGenerateCode.cs",
+              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsGenerateCode.cs",
+              "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsGenerateCode.cs",
+              "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsGenerateCode.cs",
+              "RelativeToolTip": "Business Layer\\BusinessLayer\\clsGenerateCode.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-07T20:39:46.324Z",
+              "WhenOpened": "2024-09-07T22:08:07.333Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "clsBusinessLayerGenerator.cs",
+              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsBusinessLayerGenerator.cs",
+              "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsBusinessLayerGenerator.cs",
+              "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsBusinessLayerGenerator.cs",
+              "RelativeToolTip": "Business Layer\\BusinessLayer\\clsBusinessLayerGenerator.cs",
+              "ViewState": "AgIAAMYAAAAAAAAAAAAgwPAAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-07T22:03:35.349Z",
               "EditorCaption": ""
             }
           ]
@@ -66,27 +79,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "clsGenerateCode.cs",
-              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsGenerateCode.cs",
-              "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsGenerateCode.cs",
-              "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsGenerateCode.cs",
-              "RelativeToolTip": "Business Layer\\BusinessLayer\\clsGenerateCode.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAuwDcAAAAhAAAAAAAAAA==",
+              "Title": "clsDataAccessGenerator.cs",
+              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsDataAccessGenerator.cs",
+              "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsDataAccessGenerator.cs",
+              "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsDataAccessGenerator.cs",
+              "RelativeToolTip": "Business Layer\\BusinessLayer\\clsDataAccessGenerator.cs",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAwwG0BAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-07T20:41:18.017Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "clsDataAccessTemplets.cs",
-              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsDataAccessTemplets.cs",
-              "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsDataAccessTemplets.cs",
-              "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsDataAccessTemplets.cs",
-              "RelativeToolTip": "Business Layer\\BusinessLayer\\clsDataAccessTemplets.cs",
-              "ViewState": "AgIAAJMBAAAAAAAAAAAIwK0BAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-07T20:39:45.199Z",
+              "WhenOpened": "2024-09-07T22:18:41.995Z",
               "EditorCaption": ""
             }
           ]

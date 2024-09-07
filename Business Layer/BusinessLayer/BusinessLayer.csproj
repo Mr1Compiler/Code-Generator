@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clsBusinessTemplets.cs" />
-    <Compile Include="clsDataAccessTemplets.cs" />
+    <Compile Include="clsBusinessLayerGenerator.cs" />
+    <Compile Include="clsDataAccessGenerator.cs" />
     <Compile Include="clsGenerateCode.cs" />
     <Compile Include="clsSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

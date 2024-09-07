@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Projects\\CodeGenerator\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|e:\\projects\\codegenerator\\business layer\\businesslayer\\clsbusinesslayergenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|solutionrelative:business layer\\businesslayer\\clsbusinesslayergenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|e:\\projects\\codegenerator\\business layer\\businesslayer\\clsdataaccessgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4730A44-1169-4DF6-BD38-59C97598BA2F}|Business Layer\\BusinessLayer\\BusinessLayer.csproj|solutionrelative:business layer\\businesslayer\\clsdataaccessgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,6 +39,38 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "clsBusinessLayerGenerator.cs",
+              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsBusinessLayerGenerator.cs",
+              "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsBusinessLayerGenerator.cs",
+              "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsBusinessLayerGenerator.cs",
+              "RelativeToolTip": "Business Layer\\BusinessLayer\\clsBusinessLayerGenerator.cs",
+              "ViewState": "AgIAAMYAAAAAAAAAAAAgwPAAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-07T22:03:35.349Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "clsDataAccessGenerator.cs",
+              "DocumentMoniker": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsDataAccessGenerator.cs",
+              "RelativeDocumentMoniker": "Business Layer\\BusinessLayer\\clsDataAccessGenerator.cs",
+              "ToolTip": "E:\\Projects\\CodeGenerator\\Business Layer\\BusinessLayer\\clsDataAccessGenerator.cs",
+              "RelativeToolTip": "Business Layer\\BusinessLayer\\clsDataAccessGenerator.cs",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAwwG0BAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-07T22:18:41.995Z",
+              "EditorCaption": ""
             }
           ]
         }

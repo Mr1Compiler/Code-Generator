@@ -1,5 +1,4 @@
-﻿using CodeGenerator;
-using DataAccessLayer;
+﻿using DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -22,18 +21,18 @@ namespace BusinessLayer
             List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
 
             clsSettings.GetALLColumns(Columns);
-            clsBusinessTemplets.Load(TableName, Columns);
+            clsBusinessLayerGenerator.Load(TableName, Columns);
 
-            BusinessLayer += clsBusinessTemplets.ColumnTemplete();
-            BusinessLayer += clsBusinessTemplets.PublicConstractersTemplete();
-            BusinessLayer += clsBusinessTemplets.PrivateConstractorTempelete();
-            BusinessLayer += clsBusinessTemplets.PrivateAddNewMethod();
-            BusinessLayer += clsBusinessTemplets.PrivateUpdateMethod();
-            BusinessLayer += clsBusinessTemplets.Save();
-            BusinessLayer += clsBusinessTemplets.GetAll();
-            BusinessLayer += clsBusinessTemplets.Delete();
-            BusinessLayer += clsBusinessTemplets.isExist();
-            BusinessLayer += clsBusinessTemplets.Find();
+            BusinessLayer += clsBusinessLayerGenerator.ColumnTemplete();
+            BusinessLayer += clsBusinessLayerGenerator.PublicConstractersTemplete();
+            BusinessLayer += clsBusinessLayerGenerator.PrivateConstractorTempelete();
+            BusinessLayer += clsBusinessLayerGenerator.PrivateAddNewMethod();
+            BusinessLayer += clsBusinessLayerGenerator.PrivateUpdateMethod();
+            BusinessLayer += clsBusinessLayerGenerator.Save();
+            BusinessLayer += clsBusinessLayerGenerator.GetAll();
+            BusinessLayer += clsBusinessLayerGenerator.Delete();
+            BusinessLayer += clsBusinessLayerGenerator.isExist();
+            BusinessLayer += clsBusinessLayerGenerator.Find();
 
             BusinessLayer += $@"
 }}
@@ -48,14 +47,14 @@ namespace BusinessLayer
 ";
             List<clsColumnInfo> Columns = clsDataAccess.GetColumnsInfo(DatabaseName, TableName);
 
-            clsDataAccessTemplets.Load(TableName, Columns);
+            clsDataAccessGenerator.Load(TableName, Columns);
 
-            DataAccessLayer += clsDataAccessTemplets.AddNew();
-            DataAccessLayer += clsDataAccessTemplets.Update();
-            DataAccessLayer += clsDataAccessTemplets.GetAll();
-            DataAccessLayer += clsDataAccessTemplets.Delete();
-            DataAccessLayer += clsDataAccessTemplets.IsExist();
-            DataAccessLayer += clsDataAccessTemplets.GeneralFind();
+            DataAccessLayer += clsDataAccessGenerator.AddNew();
+            DataAccessLayer += clsDataAccessGenerator.Update();
+            DataAccessLayer += clsDataAccessGenerator.GetAll();
+            DataAccessLayer += clsDataAccessGenerator.Delete();
+            DataAccessLayer += clsDataAccessGenerator.IsExist();
+            DataAccessLayer += clsDataAccessGenerator.GeneralFind();
             DataAccessLayer += $@"
 
 }}";
