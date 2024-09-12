@@ -147,7 +147,7 @@ namespace BusinessLayer
             sb.AppendLine();
             sb.AppendLine("    SqlCommand command = new SqlCommand(query, connection);");
 
-            for (int i = 1; i < ColumnsInfo.Count; i++)
+            for (int i = 0; i < ColumnsInfo.Count; i++)
             {
                 if (ColumnsInfo[i].AllowNull == false)
                 {
